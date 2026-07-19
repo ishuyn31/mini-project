@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ keyword }} 검색 결과</title>
+    <style>
+
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #27ae60;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .book-card { border: 1px solid #eee; padding: 15px; border-radius: 10px; text-align: center; }
+        img { width: 100px; height: 140px; object-fit: cover; margin-bottom: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        h3 { font-size: 14px; margin: 5px 0; height: 3em; overflow: hidden; }
+        .links { margin-top: 10px; }
+        .links a { display: block; font-size: 12px; margin: 5px 0; text-decoration: none; color: #555; }
+        
+        .pagination { margin: 30px; font-size: 18px; }
+        .pagination a { margin: 0 10px; text-decoration: none; color: blue; }
+    </style>
+</head>
+<body>
+    <h1>"{{ keyword }}" 검색 결과</h1>
+    
+
+    <div class="header-container">
+        <a href="/">◀ 처음으로 돌아가기</a>
+        <a href="/file?keyword={{ keyword }}" class="download-btn">데이터 다운로드</a>
+    </div>
+
+    <div class="grid">
+        {% for book in books %}
+        <div class="book-card">
+            <img src="{{ book.img_url }}" alt="책 표지">
+            <h3>{{ book.title }}</h3>
+            <p style="font-size: 12px; color: #888;">{{ book.info }}</p>
+            <div class="links">
+                <a href="{{ book.link }}" target="_blank">▶ 알라딘 상세 페이지</a>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="/search?keyword={{ keyword }}&page={{ page - 1 }}" style="color: #888;">◀ 이전</a>
+        {% endif %}
+        <span>{{ page }} 페이지</span>
+        <a href="/search?keyword={{ keyword }}&page={{ page + 1 }}" style="color: #888;">다음 ▶</a>
+    </div>
+</body>
+</html>

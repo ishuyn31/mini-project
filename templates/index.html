@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>도서 검색 서비스</title>
+    <style>
+        body { text-align: center; margin-top: 50px; font-family: sans-serif; }
+        input { padding: 10px; width: 300px; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>도서 검색 시스템</h1>
+    <form action="/search" method="GET">
+        <input type="text" name="keyword" placeholder="검색할 도서명을 입력하세요" required>
+        <button type="submit">검색</button>
+    </form>
+</body>
+</html>
